@@ -27,13 +27,13 @@
                     img_tag.src ="../images/up.jpg";
                 }
                 else {
-                    countNum++;
                     img_tag.src ="../images/answer.jpeg";
                     document.getElementById("countNum").innerHTML = countNum+"회";
                     alert("정답입니다.")
+                    countNum++;
                 }
             
-            if(countNum==7){
+            if(countNum>7){
                 alert("시도횟수가 초과하였습니다. 게임을 재시작 합니다.")
                 location.reload();
             }
