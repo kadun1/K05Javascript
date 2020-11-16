@@ -31,8 +31,7 @@
                     img_tag.src ="../images/answer.jpeg";
                     document.getElementById("countNum").innerHTML = countNum+"회";
                     alert("정답입니다.")
-                    var test = document.getElementById("new");
-                    test.style="display:inline;"
+                    document.getElementById("new").style.display = "inline";
                 }
             
             if(countNum>7){
@@ -57,7 +56,7 @@
         <span>숫자입력 : </span>
         <input type="number" id="userNum">
         <button type="button" onclick="game();">확인</button>
-        <button type="button" onclick="location.reload;"
+        <button type="button" onclick="location.reload();"
         id="new" style="display:none;">새로고침</button>
         <br>
         <img src="../images/updowngame.jpg" id="udimg" alt="업다운게임" width="400px" height="300px">
