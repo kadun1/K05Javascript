@@ -43,6 +43,11 @@
         .w02{width: 200px;}
         .w03{width: 100px;}
         .w04{width: 230px;}
+        .wrap_regiform p{text-align: center;}
+        .wrap_regiform input[type=submit]{
+            background-color: #333333; font-size: 1em; width:100px;
+            padding:5px; color:#ffffff; border:2px solid #333333;
+        }
     </style>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
@@ -100,22 +105,7 @@
                     <button type="button" onclick="">중복확인</button>             
                 </td>
             </tr>
-            <tr>
-                <td><span class="red">*</span> 주소</td>
-                <td>
-                    <input type="text" class="w03" name="zipcode" value="" />
-                    <button type="button" onclick="zipcodFind();" style="width:120px">우편번호찾기</button> 
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <!-- 기본주소 -->
-                    <input type="text" class="w04" name="address1" value="" />                
-                    <!-- 상세주소 -->
-                    <input type="text" class="w04" name="address2" value="" />
-                </td>
-            </tr>
+            
             <tr>
                 <td><span class="red">*</span> 이름</td>
                 <td>
@@ -135,22 +125,38 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
+                <td><span class="red">*</span>휴대폰번호</td>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 주소</td>
+                <td>
+                    <input type="text" class="w03" name="zipcode" value="" />
+                    <button type="button" onclick="zipcodFind();" style="width:120px">우편번호찾기</button> 
+                </td>
             </tr>
             <tr>
                 <td></td>
-                <td></td>
+                <td>
+                    <!-- 기본주소 -->
+                    <input type="text" class="w04" name="address1" value="" />                
+                    <!-- 상세주소 -->
+                    <input type="text" class="w04" name="address2" value="" />
+                </td>
             </tr>
+           
             <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
+                <td><span class="red">*</span>이메일</td>
+                <td>
+                    <input type="text">@
+                    <input type="text">
+                    <input type="text">
+                </td>
             </tr>
         </table>
+        <p><input type="submit" value="회원가입완료"></p>
     </form>
     </div>
 </div>
