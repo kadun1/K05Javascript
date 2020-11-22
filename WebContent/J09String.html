@@ -122,7 +122,7 @@ var getDomainStr = function(emailArr){
     
     //방법2
     for(var i=0; i<emailArr.length; i++){
-        //이메일을 0으로 찾아 1차 split한다.
+        //이메일을 @으로 찾아 1차 split한다.
         var firstArr = emailArr[i].split('@');
         //위 결과의 1번 인덱스값으로 2차 split을 진행한다.
         var secondArr = firstArr[1].split('.');

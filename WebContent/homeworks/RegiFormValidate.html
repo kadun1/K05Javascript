@@ -39,10 +39,14 @@
             position:relative; top:13px; left:-4px; height: 37px;
         }
         .wrap_regiform table tr td input{padding:8px; border:1px solid #cccccc;}
+        .wrap_regiform table tr td select{padding:8px; border:1px solid #cccccc;}
         .w01{width: 320px;}
         .w02{width: 200px;}
         .w03{width: 100px;}
         .w04{width: 230px;}
+        .w05{width: 100px;}
+        .w06{width: 150px;}
+        .red{color: red;}
         .wrap_regiform p{text-align: center;}
         .wrap_regiform input[type=submit]{
             background-color: #333333; font-size: 1em; width:120px;
@@ -67,6 +71,109 @@
             }
         }).open();
     }
+
+    function numFocus(obj, mLenght, next_obj){
+        var strLength = obj.value.length;
+
+        if(strLength>=mLenght){
+             document.getElementById(next_obj).focus();
+        }
+    }
+
+    function selEmail(domain){
+        var str = domain.value;
+        document.getElementById("setDomain").value = str;
+    }
+
+    function velidateForm(frm){
+        // 아이디체크
+        var idStr = frm.userid.value;
+        if(idStr.length<8||idStr.length>12){
+            alert("아이디는 8~12자 사이로 해야 합니다.")
+            return false;
+        }
+
+        if(idStr.charCodeAt(0)>=48&&idStr.charCodeAt(0)<=57){
+            alert("아이디는 숫자로 시작할 수 없습니다.")
+            return false;
+        }
+
+        for(var i=1; i<idStr.length; i++){
+            if(!(idStr.charCodeAt(i)>=48&&idStr.charCodeAt(i)<=57
+                ||idStr.toUpperCase().charCodeAt(i)>=65&&idStr.toUpperCase().charCodeAt(i)<=90)){
+                    alert(idStr.toUpperCase()[i]);
+                alert("아이디에는 특수문자를 사용할 수 없습니다.");
+                return false;
+            }
+        }
+        // 패스워드체크
+        var pwStr = frm.pwd.value;
+        var specialCheck = false;
+        var specialStr = ["!", "@", "#", "$", "%", "^", "&", "*"];
+        for(var i=0; i<pwStr.length; i++){
+            for(var j=0; j<specialStr.length; j++){
+                if(pwStr[i]==specialStr[j]){
+                    specialCheck = true;
+                }
+            }
+        }
+        var numberCheck = false;
+        for(var i=0; i<pwStr.length; i++){
+            if(pwStr[i].charCodeAt(0)>=48&&pwStr[i].charCodeAt(0)<=57){
+                numberCheck = true;
+            }
+        }
+
+        if(!(specialCheck==true&&numberCheck==true)){
+            alert("비밀번호는 숫자와 특수기호가 포함되어야 합니다.")
+            frm.pwd.focus();
+            return false;
+        }
+        if(frm.pwd.value != frm.pwd2.value){
+            alert("입력한 패스워드가 일치하지 않습니다.")
+            frm.pwd.value="";
+            frm.pwd2.value="";
+            frm.pwd.focus();
+            return false;
+        }
+
+    }
+    function idCheck(){
+        var frm = document.getElementsByName("userid")[0].value;
+
+        if(frm.length<8||frm.length>12){
+            alert("아이디는 8~12자 사이로 해야 합니다.")
+            document.getElementsByName("userid")[0].focus();
+            return;
+        }
+
+        if(frm.charCodeAt(0)>=48&&frm.charCodeAt(0)<=57){
+            alert("아이디는 숫자로 시작할 수 없습니다.")
+            document.getElementsByName("userid")[0].focus();
+            return;
+        }
+
+        for(var i=1; i<frm.length; i++){
+            if(!(frm.charCodeAt(i)>=48&&frm.charCodeAt(i)<=57
+                ||frm.toUpperCase().charCodeAt(i)>=65&&frm.toUpperCase().charCodeAt(i)<=90)){
+                    alert(frm.toUpperCase()[i]);
+                alert("아이디에는 특수문자를 사용할 수 없습니다.");
+                document.getElementsByName("userid")[0].focus();
+                return;
+            }
+        }
+
+        if(frm==""){
+            alert("아이디를 입력해주세요");
+            document.getElementsByName("userid")[0].focus();
+        }
+        else{
+            frm.readOnly = true;
+            window.open("../pages/id_overapping.jsp?id="+frm,
+                "idover", "width=300, height=200");
+        }   
+    }
+    
     </script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -92,7 +199,7 @@
     <h2>회원가입폼</h2>
     일반텍스트
     <div class="wrap_regiform">
-        <form name="regiform">
+        <form name="regiform" onsubmit="return velidateForm(this)">
         <table class="regi_table">
             <colgroup>
                 <col width="180px">
@@ -101,11 +208,22 @@
             <tr>
                 <td><span class="red">*</span> 아이디</td>
                 <td>
-                    <input type="text" class="w01" name="userid" value="" />       
-                    <button type="button" onclick="">중복확인</button>             
+                    <input type="text" class="w01" name="userid"/>       
+                    <button type="button" onclick="idCheck();">중복확인</button>             
                 </td>
             </tr>
-            
+            <tr>
+                <td><span class="red">*</span> 패스워드</td>
+                <td>
+                    <input type="password" name="pwd" class="w01">
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 패스워드 확인</td>
+                <td>
+                    <input type="password" name="pwd2" class="w01">
+                </td>
+            </tr>
             <tr>
                 <td><span class="red">*</span> 이름</td>
                 <td>
@@ -121,19 +239,26 @@
                 <td><span class="red">*</span> 생년월일</td>
                 <td style="padding: 0px 0 5px 5px;">
                     <input type="text" class="w02" name="birthday" id="birthday" value="" />
-                    <img src="../images/pick.jpg" alt="" class="pick" />
+                    <img src="./images/pick.jpg" alt="" class="pick" />
                 </td>
             </tr>
             <tr>
                 <td><span class="red">*</span>휴대폰번호</td>
                 <td>
-                    <input type="text">
+                    <select name="phoneNum" onchange="numFocus(this, 3, 'secondNum');">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                        <option value="019">019</option>
+                    </select>-
+                    <input type="text" id="secondNum" size="4" class="w05" onkeyup="numFocus(this, 4, 'thirdNum');">-
+                    <input type="text" id="thirdNum" size="4" class="w05" onkeyup="numFocus(this, 4, 'address');">
                 </td>
             </tr>
             <tr>
                 <td><span class="red">*</span> 주소</td>
                 <td>
-                    <input type="text" class="w03" name="zipcode" value="" />
+                    <input type="text" class="w03" name="zipcode" id="address" value="" />
                     <button type="button" onclick="zipcodFind();" style="width:120px">우편번호찾기</button> 
                 </td>
             </tr>
@@ -150,9 +275,14 @@
             <tr>
                 <td><span class="red">*</span>이메일</td>
                 <td>
-                    <input type="text">@
-                    <input type="text">
-                    <input type="text">
+                    <input type="text" class="w06">@
+                    <input type="text" class="w06" id="setDomain">
+                            <select name="email" style="width: 140px;" onchange="selEmail(this);">
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.com">daum.net</option>
+                                <option value="nate.com">nate.com</option>
+                            </select>
                 </td>
             </tr>
         </table>
