@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>J17CssControl.html</title>
     <script>
         //전역변수 : 기사부분의 폰트 사이즈를 저장
         var pTag, pSize;
-
+        
         window.onload = function(){
             pTag = document.getElementById("article");
             //폰트사이즈 변경을 위해 숫자로 변경한다.
             pSize = parseInt(pTag.style.fontSize);
         }
-
-        function fnArticle(flag){
+        
+        function fnArticle(flag){	
             /*
             JS에서 CSS속성 컨트롤
                 : DOM.style.CSS속성 = "속성값";
                 단 이때 CSS 속성에 하이픈이 들어간다면, 제거후 첫글자를
                 대문자로 변경한다. 또한 크기를 부여할때는 반드시 px과 같은
-                단위를 기술해야한다.
+                단위를 기술해야한다. 
             */
             switch(flag){
             case "+":
@@ -53,66 +53,80 @@
                 pTag.style.textAlign = "left";
                 break;
             default:
-                pTag.style.color = "black";
+                pTag.style.color = "black";			
             }
         }
-
-/*
-	문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
-	폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
-	글꼴 : Verdana, 굴림체, 휴먼옛체, 궁서, Impact
-        font-family
-*/
-    var fontToggle = 0; //폰트 토글을 위한 전역변수
-    function setFont(){
-        //문제에서 주어진 폰트를 배열로 선언
-        var fontArray = ["verdana", "굴림체", "휴먼옛체", "궁서", "Impact"];
-        //정수를 5로 나누면 나머지는 0~4까지 생성됨
-        var fontIndex = fontToggle%5;
-        //위에서 구한 수를 인덱스로 사용하여 폰트를 설정
-        pTag.style.fontFamily = fontArray[fontIndex];
-        //함수를 호출할때마다 전역변수 증가
-        fontToggle++;
-    }
-	// function setFont(){
-    //     var fontFam = ["verdana", "굴림체", "휴먼옛체", "궁서", "Impact"];
-    //     pTag.style.fontFamily = fontFam[count];
-    //     if(fontToggle==5) fontToggle=0;
-    //     else fontToggle++;
-	// }
-
+    
+    
+    
+    
+        
+        /*
+        문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+        폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
+        글꼴 : Verdana, 굴림체, 휴먼옛체, 궁서, Impact
+        */
+        var fontToggle = 0; //폰트 토글을 위한 전역변수
+        function setFont(){
+            //문제에서 주어진 폰트를 배열로 선언
+            var fontArray = ['Verdana', '굴림체', '휴먼옛체', '궁서', 'Impact'];
+            //정수를 5로 나누면 나머지는 0~4까지 생성됨
+            var fontIndex = fontToggle % 5;
+            //위에서 구한 수를 인덱스로 사용하여 폰트를 설정
+            pTag.style.fontFamily = fontArray[fontIndex];
+            //함수를 호출할때마다 전역변수 증가
+            fontToggle ++;
+        }
     </script>
+
+    <style>
+        body { font-family: 굴림체; }
+    </style>
 </head>
 <body>
-    <h2>자바스크립트로 CSS제어하기</h2>
-    <input type="button" value="글꼴바꾸기" onclick="setFont();">
-    <fieldset>
-        <legend>신문기사</legend>
-        <button onclick="fnArticle('+');">+</button>
-        <button onclick="fnArticle('-');">-</button>
-        <button onclick="fnArticle('R');">Red</button>
-        <button onclick="fnArticle('G');">Green</button>
-        <button onclick="fnArticle('B');">Blue</button>
-        <button onclick="fnArticle('');">Black</button>
-        <button onclick="fnArticle('Bo');">볼드체</button>
-        <button onclick="fnArticle('No');">보통체</button>
-        <button onclick="fnArticle('Ce');">가운데정렬</button>
-        <button onclick="fnArticle('Le');">좌측정렬</button>
-    </fieldset>
-    <p style="font-size:12px;" id="article">
-        신규확진 230명 나흘째 200명대, 지역 202명…수도권 1.5단계로(종합)<br/><br/>
-        서울=연합뉴스) 신선미 기자 = 신종 코로나바이러스 감염증(코로나19)<br/>
-        집단발병이 전국 곳곳에서 이어지면서 17일에도 신규 확진자 수는 200명대를 기록했다.<br/>
-        지난 14일부터 이날까지 나흘 연속 200명대를 이어간 것이다.<br/>
-        이 같은 확산세는 카페와 직장, 가족·지인모임 등 일상 속 집단감염이 만연한 상황에서<br/>
-        최근 들어 학교와 동아리, 기도원, 백화점, 음식점 등을 고리로 새로운 발병 사례가<br/>
-        속속 발생한 데 따른 것이다.<br/>
-        방역당국은 일단 확산세가 거센 수도권의 '사회적 거리두기'를 19일 0시를 기해<br/>
-        1.5단계로 격상키로 결정했다.<br/>
-        방역당국은 이와 동시에 각 지역의 증가세를 꺾기 위한 다양한 대책도 고심하고 있다.<br/>
-    </p>
+	<h2>자바스크립트로 CSS제어하기</h2>
+	<input type="button" value="글꼴바꾸기" onclick="setFont();"/>
+	<fieldset>
+		<legend>신문기사</legend>
+		<button onclick="fnArticle('+');">+</button>
+		<button onclick="fnArticle('-');">-</button>
+		<button onclick="fnArticle('R');">Red</button>
+		<button onclick="fnArticle('G');">Green</button>
+		<button onclick="fnArticle('B');">Blue</button>
+		<button onclick="fnArticle('');">Black</button>
+		<button onclick="fnArticle('Bo');">볼드체</button>
+		<button onclick="fnArticle('No');">보통체</button>
+		<button onclick="fnArticle('Ce');">가운데정렬</button>
+		<button onclick="fnArticle('Le');">좌측정렬</button>
+	</fieldset>
+	<p style="font-size:12px;" id="article">
+문대통령 "기간산업안정기금 40조·긴급고용안정대책 10조 투입"(종합)<br/>
+<br/><br/>
+"지원받는 기업에 고용유지·자구노력·이익공유 등 상응의무 부과"
+<br/><br/>
+"100조원 금융조치에 35조원 추가…기업 유동성 지원"
+<br/><br/>
+"고용유지지원금 확대…고용 사각지대 93만명에 3개월간 50만원씩"
+<br/><br/>
+"정부 50만개 일자리 창출…'한국판 뉴딜' 추진기획단 신속 준비하라"
+<br/><br/>
+"비상대책에 필요한 3차 추경 및 입법 준비" 지시
+<br/><br/>
+<br/><br/>
+비상경제회의 주재하는 문 대통령(서울=연합뉴스) 김주성 기자 = 문재인 대통령이 22일 오전 청와대에서 제5차 비상경제회의를 주재하고 있다. 2020.4.22 utzza@yna.co.kr
+<br/><br/>
 
-    
-    
+(서울=연합뉴스) 김범현 박경준 기자 = 문재인 대통령은 22일 신종 코로나바이러스 감염증(코로나19)으로 인한 경제 위기 대응 방안과 관련해 "40조원 규모로 위기 극복과 고용을 위한 기간산업안정기금을 긴급히 조성한다"고 말했다.
+<br/><br/>
+또한 문 대통령은 "정부는 긴급고용안정대책에 10조원을 별도로 투입해 고용 충격에 적극 대응하고자 한다"고 밝혔다.
+<br/><br/>
+문 대통령은 이날 청와대에서 주재한 제5차 비상경제회의에서 "지금은 위기의 시작 단계다. 기업 위기와 함께 고용 한파가 눈앞에 다가오고 있다"며 이 같은 비상대책을 제시했다.
+<br/><br/>
+문 대통령은 기간산업 지원을 위해 40조원 규모의 기금을 조성하기로 한 배경에 대해 "기간산업이 크게 위협받아 일시적 자금 지원이나 유동성 공급만으로는 어려움을 극복하기 힘든 기업이 생기기 시작했다"고 언급했다.
+<br/><br/>
+산업 분야 중에서도 경제에 큰 영향을 미치는 항공·해운·자동차·조선·기계 등 기간산업의 위기가 고용에 더 큰 충격을 줄 수 있다고 보고 해당 부문을 우선 지원하겠다는 의지로 풀이된다.
+<br/><br/>
+문 대통령은 "일시적인 유동성 지원을 넘어 출자나 지급보증 등 가능한 지원 방식을 총동원하겠다"면서 "강력한 의지를 갖고 기간산업을 반드시 지켜내겠다"고 강조했다.
+	</p>
 </body>
 </html>
